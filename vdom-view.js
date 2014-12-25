@@ -9,23 +9,25 @@ var createElement = require('virtual-dom/create-element');
 var VNode = require('virtual-dom/vnode/vnode');
 var VText = require('virtual-dom/vnode/vtext');
 var convertHTML = require('html-to-vdom')({
-    VNode: VNode,
-    VText: VText
+  VNode: VNode,
+  VText: VText
 });
 
 module.exports = Backbone.View.extend({
   template: _.template('<p>w<%= content %></p>'),
   initialize: function() {
-    this.vel = convertHTML(this.el); // tree
-    this.el = createElement(this.vel); //rootNote
+    this.virtualEl = convertHTML(this.el); // tree
+    this.virtualEl.tagName = this.el.tagName;
+    this.internalEl = createElement(this.virtualEl); //rootNote
+    this.$el.html(this.internalEl);
 
     this.model && this.model.on('change', this.render, this);
   },
   render: function() {
-    var newVel = convertHTML(this.template(this.model.toJSON()));
-    var patches = diff(this.vel, newVel);
-    this.el = patch(this.el, patches);
-    this.vel = newVel;
+    var newVirtualEl = convertHTML(this.template(this.model.toJSON()));
+    var patches = diff(this.virtualEl, newVirtualEl);
+    this.internalEl = patch(this.internalEl, patches);
+    this.virtualEl = newVirtualEl;
     return this;
   }
 });

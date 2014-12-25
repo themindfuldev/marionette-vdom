@@ -2,23 +2,19 @@
 
 var $ = require('jquery');
 require('backbone').$ = $;
-
-//var VDOMView = require('./vdom-view');
-var VDOMView = require('./app-view');
+var VDOMView = require('./vdom-view');
+//var VDOMView = require('./app-view');
 var Model = require('./app-model');
 
 var myModel = new Model({
-    unit: 'aaaaaa'
+  unit: 'aaaaaa'
 });
-
-var el = $('<p>').appendTo('body');
 
 var myView = new VDOMView({
-    el: el,
-    model: myModel,
+  model: myModel
 });
-myView.render();
+myView.render().$el.appendTo('body');
 
 setInterval(function() {
-    myModel.tick();
+  myModel.tick();
 }, 1000);
