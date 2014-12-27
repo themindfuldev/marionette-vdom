@@ -1,3 +1,14 @@
+### v0.0.2
+
+#### Overview
+
+* The main goal is to improve the solution to be less scenario-specific and more reusable, playing with foundational methods and event handling
+
+#### Features
+
+* Switched the virtual el setup from ```initialize``` to ```setElement```.
+
+
 ### [v0.0.1](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.1)
 
 #### Overview

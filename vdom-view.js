@@ -12,11 +12,13 @@ var convertHTML = require('html-to-vdom')({
 });
 
 module.exports = Backbone.View.extend({
-  initialize: function() {
+  setElement: function() {
+    Backbone.View.prototype.setElement.apply(this, Array.prototype.slice.call(arguments));
     this.virtualEl = convertHTML(this.el);
     this.virtualEl.tagName = this.el.tagName;
     this.internalEl = createElement(this.virtualEl);
     this.$el.html(this.internalEl);
+    return this;
   },
 
   render: function() {

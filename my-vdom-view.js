@@ -1,9 +1,10 @@
+'use strict';
+
 var VDOMView = require('./vdom-view');
 var _ = require('underscore');
 
 module.exports = VDOMView.extend({
   initialize: function() {
-    VDOMView.prototype.initialize.apply(this);
     this.model && this.model.on('change', this.render, this);
   },
 
