@@ -1,4 +1,4 @@
-### v0.0.1 - [view tag](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.1)
+### [v0.0.1](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.1)
 
 #### Overview
 

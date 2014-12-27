@@ -13,4 +13,4 @@ To run:
 npm start
 ```
 
-Make sure to check out the (changelog.md)
+Make sure to check out the [change log](changelog.md).
