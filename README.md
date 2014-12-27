@@ -1,7 +1,7 @@
 Backbone.VDOMView
 =================
 
-A Backbone.View implementation with virtual-dom
+A Backbone.View implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 To install:
 ```
@@ -12,3 +12,5 @@ To run:
 ```
 npm start
 ```
+
+Make sure to check out the (changelog.md)
