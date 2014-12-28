@@ -50,6 +50,7 @@ ok = function(v) {
   expect(!!v).to.eql(true);
 }
 
+
 describe("Backbone.View", function(){
   beforeEach(function() {
     this.sinon = sinon.sandbox.create();
@@ -69,25 +70,37 @@ describe("Backbone.View", function(){
       other     : 'non-special-option'
     });
 
-    equal(view.el.id, 'test-view');
-    equal(view.el.className, 'test-view');
-    equal(view.el.other, void 0);
+    expect(view.el.id).to.eql('test-view')
+    expect(view.el.className).to.eql('test-view');
+    expect(view.el.other).to.eql(void 0);
   });
 
-  it("jQuery", function() {
+  it("$", function() {
     var view = new VDOMItemView;
     view.setElement('<p><a><b>test</b></a></p>');
-    strictEqual(view.$('a b').html(), 'test');
+    var result = view.$('a b');
+
+    expect(result[0].innerHTML).to.eql('test');
+    expect(result.length === +result.length).to.eql(true);
+  });
+
+  it("$el", function() {
+    var view = new VDOMItemView;
+    view.setElement('<p><a><b>test</b></a></p>');
+    expect(view.el.nodeType).to.eql(1);
+
+    expect(view.$el instanceof Backbone.$).to.eql(true)
+    expect(view.$el[0]).to.eql(view.el);
   });
 
   it("initialize", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       initialize: function() {
         this.one = 1;
       }
     });
 
-    strictEqual(new View().one, 1);
+    expect(new View().one).to.eql(1);
   });
 
   it("delegateEvents", function() {
@@ -102,20 +115,33 @@ describe("Backbone.View", function(){
 
     view.delegateEvents(events);
     view.$('h1').trigger('click');
-    equal(counter1, 1);
-    equal(counter2, 1);
+    expect(counter1).to.eql(1);
+    expect(counter2).to.eql(1);
 
     view.$('h1').trigger('click');
-    equal(counter1, 2);
-    equal(counter2, 2);
+    expect(counter1).to.eql(2);
+    expect(counter2).to.eql(2);
 
     view.delegateEvents(events);
     view.$('h1').trigger('click');
-    equal(counter1, 3);
-    equal(counter2, 3);
+    expect(counter1).to.eql(3);
+    expect(counter2).to.eql(3);
   });
 
+  // it("delegate", function() {
+  //   var view = new VDOMItemView({el: '#testElement'});
+
+  //   view.delegate('click', 'h1', function() {
+  //     // ok(true);/
+  //   });
+  //   view.delegate('click', function() {
+  //     // ok(true);
+  //   });
+  //   view.$('h1').trigger('click');
+  // });
+
   it("delegateEvents allows functions for callbacks", function() {
+    setFixtures("<p></p>")
     var view = new VDOMItemView({el: '<p></p>'});
     view.counter = 0;
 
@@ -127,27 +153,28 @@ describe("Backbone.View", function(){
 
     view.delegateEvents(events);
     view.$el.trigger('click');
-    equal(view.counter, 1);
+    expect(view.counter).to.eql(1);
 
     view.$el.trigger('click');
-    equal(view.counter, 2);
+    expect(view.counter).to.eql(2);
 
     view.delegateEvents(events);
     view.$el.trigger('click');
-    equal(view.counter, 3);
+    expect(view.counter).to.eql(3);
   });
 
 
   it("delegateEvents ignore undefined methods", function() {
+    setFixtures("<p></p>")
     var view = new VDOMItemView({el: '<p></p>'});
     view.delegateEvents({'click': 'undefinedMethod'});
     view.$el.trigger('click');
   });
 
   it("undelegateEvents", function() {
+    setFixtures("<div id='testElement'><h1></h1></div>")
     var counter1 = 0, counter2 = 0;
 
-    setFixtures("<div id='testElement'><h1></h1></div>");
     var view = new VDOMItemView({el: '#testElement'});
     view.increment = function(){ counter1++; };
     view.$el.on('click', function(){ counter2++; });
@@ -170,8 +197,65 @@ describe("Backbone.View", function(){
     equal(counter2, 3);
   });
 
+  // it("undelegate", function() {
+  //   view = new VDOMItemView({el: '#testElement'});
+  //   view.delegate('click', function() { ok(false); });
+  //   view.delegate('click', 'h1', function() { ok(false); });
+
+  //   view.undelegate('click');
+
+  //   view.$('h1').trigger('click');
+  //   view.$el.trigger('click');
+  // });
+
+  // it("undelegate with passed handler", function() {
+  //   view = new VDOMItemView({el: '#testElement'});
+  //   var listener = function() { ok(false); };
+  //   view.delegate('click', listener);
+  //   view.delegate('click', function() { ok(true); });
+  //   view.undelegate('click', listener);
+  //   view.$el.trigger('click');
+  // });
+
+  // it("undelegate with selector", function() {
+  //   view = new VDOMItemView({el: '#testElement'});
+  //   view.delegate('click', function() { ok(true); });
+  //   view.delegate('click', 'h1', function() { ok(false); });
+  //   view.undelegate('click', 'h1');
+  //   view.$('h1').trigger('click');
+  //   view.$el.trigger('click');
+  // });
+
+  // it("undelegate with handler and selector", function() {
+  //   view = new VDOMItemView({el: '#testElement'});
+  //   view.delegate('click', function() { ok(true); });
+  //   var handler = function(){ ok(false); };
+  //   view.delegate('click', 'h1', handler);
+  //   view.undelegate('click', 'h1', handler);
+  //   view.$('h1').trigger('click');
+  //   view.$el.trigger('click');
+  // });
+
+  it("tagName can be provided as a string", function() {
+    var View = Backbone.View.extend({
+      tagName: 'span'
+    });
+
+    equal(new View().el.tagName, 'SPAN');
+  });
+
+  it("tagName can be provided as a function", function() {
+    var View = Backbone.View.extend({
+      tagName: function() {
+        return 'p';
+      }
+    });
+
+    ok(new View().$el.is('p'));
+  });
+
   it("_ensureElement with DOM node el", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       el: document.body
     });
 
@@ -179,25 +263,24 @@ describe("Backbone.View", function(){
   });
 
   it("_ensureElement with string el", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       el: "body"
     });
     strictEqual(new View().el, document.body);
 
-    setFixtures("<div id='testElement'><h1></h1></div>");
-    View = VDOMItemView.extend({
+    View = Backbone.View.extend({
       el: "#testElement > h1"
     });
     strictEqual(new View().el, $("#testElement > h1").get(0));
 
-    View = VDOMItemView.extend({
+    View = Backbone.View.extend({
       el: "#nonexistent"
     });
     ok(!new View().el);
   });
 
   it("with className and id functions", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       className: function() {
         return 'className';
       },
@@ -211,7 +294,7 @@ describe("Backbone.View", function(){
   });
 
   it("with attributes", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       attributes: {
         id: 'id',
         'class': 'class'
@@ -223,7 +306,7 @@ describe("Backbone.View", function(){
   });
 
   it("with attributes as a function", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       attributes: function() {
         return {'class': 'dynamic'};
       }
@@ -236,7 +319,7 @@ describe("Backbone.View", function(){
     var count = 0;
     var $el = $('<p></p>');
 
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       el: $el,
       events: {
         click: function() {
@@ -258,26 +341,19 @@ describe("Backbone.View", function(){
     equal(5, count);
   });
 
-  it("custom events, with namespaces", function() {
-    var count = 0;
-
-    var View = VDOMItemView.extend({
+  it("custom events", function() {
+    var View = Backbone.View.extend({
       el: $('body'),
-      events: function() {
-        return {"fake$event.namespaced": "run"};
-      },
-      run: function() {
-        count++;
+      events: {
+        "fake$event": function() { ok(true); }
       }
     });
 
     var view = new View;
     $('body').trigger('fake$event').trigger('fake$event');
-    equal(count, 2);
 
-    $('body').off('.namespaced');
+    $('body').off('fake$event');
     $('body').trigger('fake$event');
-    equal(count, 2);
   });
 
   it("#1048 - setElement uses provided object.", function() {
@@ -294,7 +370,7 @@ describe("Backbone.View", function(){
     var button1 = $('<button></button>');
     var button2 = $('<button></button>');
 
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       events: {
         click: function(e) {
           ok(view.el === e.target);
@@ -310,7 +386,7 @@ describe("Backbone.View", function(){
   });
 
   it("#1172 - Clone attributes object", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       attributes: {foo: 'bar'}
     });
 
@@ -321,21 +397,11 @@ describe("Backbone.View", function(){
     ok(!view2.el.id);
   });
 
-  it("#1228 - tagName can be provided as a function", function() {
-    var View = VDOMItemView.extend({
-      tagName: function() {
-        return 'p';
-      }
-    });
-
-    ok(new View().$el.is('p'));
-  });
-
   it("views stopListening", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       initialize: function() {
-        this.listenTo(this.model, 'all x', function(){ ok(false); }, this);
-        this.listenTo(this.collection, 'all x', function(){ ok(false); }, this);
+        this.listenTo(this.model, 'all x', function(){ ok(false); });
+        this.listenTo(this.collection, 'all x', function(){ ok(false); });
       }
     });
 
@@ -350,7 +416,7 @@ describe("Backbone.View", function(){
   });
 
   it("Provide function for el.", function() {
-    var View = VDOMItemView.extend({
+    var View = Backbone.View.extend({
       el: function() {
         return "<p><a></a></p>";
       }
@@ -362,11 +428,9 @@ describe("Backbone.View", function(){
   });
 
   it("events passed in options", function() {
-    setFixtures("<div id='testElement'><h1></h1></div>");
-
     var counter = 0;
-
-    var View = VDOMItemView.extend({
+    setFixtures("<div id='testElement'><h1></h1></div>");
+    var View = Backbone.View.extend({
       el: '#testElement',
       increment: function() {
         counter++;
@@ -382,4 +446,19 @@ describe("Backbone.View", function(){
     view.$('h1').trigger('click').trigger('click');
     equal(counter, 2);
   });
+
+  // it("remove", function() {
+  //   var view = new VDOMItemView;
+  //   document.body.appendChild(view.el);
+
+  //   view.delegate('click', function() { ok(false); });
+  //   view.listenTo(view, 'all x', function() { ok(false); });
+
+  //   view.remove();
+  //   view.$el.trigger('click');
+  //   view.trigger('x');
+
+  //   // In IE8 and below, parentNode still exists but is not document.body.
+  //   notEqual(view.el.parentNode, document.body);
+  // });
 });
