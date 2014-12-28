@@ -8,9 +8,5 @@ module.exports = VDOMView.extend({
     this.model && this.model.on('change', this.render, this);
   },
 
-  template: _.template('<p>w<%= content %></p>'),
-
-  renderEl: function(){
-    return this.template(this.model.toJSON());
-  }
+  template: _.template('<p>w<%= content %></p>')
 });
