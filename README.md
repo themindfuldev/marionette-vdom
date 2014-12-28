@@ -1,9 +1,10 @@
-Backbone.VDOMView
+Marionette.VDOMItemView
 =================
 
-A Backbone.View implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
+A Marionette.ItemView implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 To install:
+
 ```
 npm install
 ```
