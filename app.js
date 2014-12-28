@@ -5,7 +5,6 @@ require('backbone').$ = $;
 
 var Model = require('./app-model');
 var MyView = require('./my-vdom-view');
-//var MyView = require('./my-regular-view');
 
 var myModel = new Model({
   unit: 'aaaaaa'
