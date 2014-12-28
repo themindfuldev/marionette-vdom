@@ -2,7 +2,7 @@
 
 #### Overview
 
-* The main goal is to prove the concept of Virtual DOM over Marionette Views as it was suggested on a [Marionette.js thread](https://github.com/marionettejs/backbone.marionette/issues/2126)
+* The main goal of this version is to prove the concept of Virtual DOM over Marionette Views as it was suggested on a [Marionette.js thread](https://github.com/marionettejs/backbone.marionette/issues/2126)
 
 #### Features
 
@@ -12,7 +12,7 @@
     * generate a new virtual DOM element from the newly generated HTML.
     * diff this new virtual DOM element with the current one and obtain a patch.
     * patch the current real DOM with it
-* @samccone very kindly pitched in, bringing the unit test suite from Marionette and Backbone in order to assess which work needs to be done for the solution to be more solid and perhaps get released.
+* [@samccone](https://github.com/samccone) very kindly pitched in, bringing the unit test suite from Marionette and Backbone in order to assess which work needs to be done for the solution to be more solid and perhaps get released.
 * Out of 90 test cases we have only gotten 3 failures, which is pretty impressive.
 * I was able to verify it does really work by comparing DevTools output for 2 scenarios, virtual vs non-virtual:
 

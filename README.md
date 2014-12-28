@@ -1,4 +1,4 @@
-Marionette.VDOMItemView
+Marionette.VDOMView
 =================
 
 A Marionette.ItemView implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
