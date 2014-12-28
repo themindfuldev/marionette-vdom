@@ -1,6 +1,6 @@
 'use strict';
 
-var VDOMView = require('./vdom-view');
+var VDOMView = require('./vdom-item-view');
 var _ = require('underscore');
 
 module.exports = VDOMView.extend({
