@@ -1,4 +1,4 @@
-### upcoming [v0.0.2](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.2) [view commit logs](https://github.com/tiagorg/Backbone.VDOMView/compare/v0.0.1...master)
+### upcoming [v0.0.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...master)
 
 #### Overview
 
@@ -9,7 +9,7 @@
 * Come up with virtual DOM implementation for other Marionette views.
 * Strive for conceiving a reusable virtual DOM View to be extended by the leaf Marionette views (either by inheritance or mixing).
 
-### [v0.0.1](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.1)
+### [v0.0.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.1)
 
 #### Overview
 
