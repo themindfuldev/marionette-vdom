@@ -1,7 +1,7 @@
 {
-  "name": "Backbone.VDOMView",
-  "version": "0.0.2",
-  "description": "A Backbone.View implementation with virtual-dom",
+  "name": "Marionette.VDOMItemView",
+  "version": "0.0.1",
+  "description": "A Marionette.ItemView implementation with virtual-dom",
   "main": "index.js",
   "scripts": {
     "start": "beefy app.js:build.js --live",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tiagorg/Backbone.VDOMView"
+    "url": "https://github.com/tiagorg/Marionette.VDOMItemView"
   },
   "keywords": [
     "backbone",
@@ -21,9 +21,9 @@
   "author": "Tiago Garcia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tiagorg/Backbone.VDOMView/issues"
+    "url": "https://github.com/tiagorg/Marionette.VDOMItemView/issues"
   },
-  "homepage": "https://github.com/tiagorg/Backbone.VDOMView",
+  "homepage": "https://github.com/tiagorg/Marionette.VDOMItemView",
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.3.0",

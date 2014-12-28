@@ -14,4 +14,10 @@ To run:
 npm start
 ```
 
+To run the unit tests:
+
+```
+mocha spec/
+```
+
 Make sure to check out the [change log](changelog.md).

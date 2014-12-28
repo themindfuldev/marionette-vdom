@@ -1,24 +1,19 @@
-### v0.0.2
-
-#### Overview
-
-* The main goal is to improve the solution to be less scenario-specific and more reusable, playing with foundational methods and event handling
-
-#### Features
-
-* Switched the virtual el setup from ```initialize``` to ```setElement```.
-
-
 ### [v0.0.1](https://github.com/tiagorg/Backbone.VDOMView/releases/tag/v0.0.1)
 
 #### Overview
 
-* The main goal is to prove the concept of Virtual DOM over Backbone Views as it was suggested on a [Marionette.js thread](https://github.com/marionettejs/backbone.marionette/issues/2126)
+* The main goal is to prove the concept of Virtual DOM over Marionette Views as it was suggested on a [Marionette.js thread](https://github.com/marionettejs/backbone.marionette/issues/2126)
 
 #### Features
 
 * Based on [virtual-dom](https://github.com/Matt-Esch/virtual-dom)
-* Each view's render will compare to its previous state and only diff to it.
+* Uses [html-to-vdom](https://github.com/TimBeyer/html-to-vdom) to convert any HTML template to VDOM.
+* Each time the view needs to render, it will go through the following process (specified in ```attachElContent``` method):
+    * generate a new virtual DOM element from the newly generated HTML.
+    * diff this new virtual DOM element with the current one and obtain a patch.
+    * patch the current real DOM with it
+* @samccone very kindly pitched in, bringing the unit test suite from Marionette and Backbone in order to assess which work needs to be done for the solution to be more solid and perhaps get released.
+* Out of 90 test cases we have only gotten 3 failures, which is pretty impressive.
 * I was able to verify it does really work by comparing DevTools output for 2 scenarios, virtual vs non-virtual:
 
 ##### Non-virtual
@@ -37,7 +32,5 @@ There is also plenty of more JS happening (2nd image) but the Used JS Heap is mu
 
 #### Next steps
 
-* The code is not very neat, it is making certain assumptions about the Backbone.View's ```el``` as it is appending the internal virtual element into it. We want to avoid that by working with ```setElement``` method from Backbone.View. 
-* As far for Marionette.js: @samccone and @jmeas suggested using Marionette.View as a base class and from there see if we can get event registration and UI working. Also, strive for supporting a ```itemView``` replacement. We should fork this project for Marionette.js specific code.
-* Yet another alternative to vdom would be going with HTMLBars. We should learn up until which point is it worth to continue playing with VDOM.
-
+* Fix the 3 unit tests that are failing.
+* Improve the test suite.
