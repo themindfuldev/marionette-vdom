@@ -2,7 +2,13 @@
 
 #### Overview
 
-* The main goal of this version is to fix the 3 unit tests that are failing and improve the test suite.
+* The main goal of this version is to fix the unit tests that are failing and improve the test suite.
+
+#### Features
+
+* Replaced the test suite for the one from Backbone 1.1.2
+* Might replace [html-to-vdom](https://github.com/TimBeyer/html-to-vdom) for [vdom-virtualize](https://github.com/marcelklehr/vdom-virtualize/)
+* Might stop inheriting ```setElement``` and defining its own implementation.
 
 #### Next steps
 
