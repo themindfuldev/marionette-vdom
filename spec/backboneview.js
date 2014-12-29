@@ -77,6 +77,7 @@ describe("Backbone.View", function(){
   it("jQuery", function() {
     var view = new VDOMItemView;
     view.setElement('<p><a><b>test</b></a></p>');
+    console.log(view.$el.html());
     strictEqual(view.$('a b').html(), 'test');
   });
 
