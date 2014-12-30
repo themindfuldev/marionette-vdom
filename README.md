@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tiagorg/Marionette.VDOMView.svg?branch=master)](https://travis-ci.org/tiagorg/Marionette.VDOMView)
+
 Marionette.VDOMView
 =================
 
