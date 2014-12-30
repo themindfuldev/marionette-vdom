@@ -1,44 +1,4 @@
-var _     = require('underscore')
-var jsdom = require('jsdom').jsdom;
-
-global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
-  FetchExternalResources   : ['script'],
-  ProcessExternalResources : ['script'],
-  MutationEvents           : '2.0',
-  QuerySelector            : false
-});
-
-global.window = document.createWindow();
-global.navigator = global.window.navigator;
-
-var chai = require('chai');
-var sinon = require('sinon');
-var sinonChai = require('sinon-chai');
-var chaiJq = require('chai-jq');
-
-chai.use(sinonChai);
-chai.use(chaiJq);
-
-global.expect = chai.expect;
-
-var $            = require('jquery');
-var Backbone     = require('backbone');
-Backbone.$       = $;
-
-var Marionette   = require('backbone.marionette');
-var VDOMItemView = require("../vdom-item-view")
-
-var $body = $(document.body);
-
-var setFixtures = function () {
-  _.each(arguments, function (content) {
-    $body.append(content);
-  });
-};
-
-var clearFixtures = function() {
-  $body.empty();
-}
+require('./setup/init');
 
 // lol qunit hack
 strictEqual = equal = function(v1, v2) {
@@ -51,16 +11,6 @@ ok = function(v) {
 }
 
 describe("Backbone.View", function(){
-  beforeEach(function() {
-    this.sinon = sinon.sandbox.create();
-    this.setFixtures   = setFixtures;
-    this.clearFixtures = clearFixtures;
-  });
-
-  afterEach(function() {
-    this.sinon.restore();
-    this.clearFixtures();
-  });
 
   it("constructor", function() {
     var view = new VDOMItemView({
@@ -91,7 +41,7 @@ describe("Backbone.View", function(){
   });
 
   it("delegateEvents", function() {
-    setFixtures("<div id='testElement'><h1></h1></div>");
+    this.setFixtures("<div id='testElement'><h1></h1></div>");
     var counter1 = 0, counter2 = 0;
 
     var view = new VDOMItemView({el: '#testElement'});
@@ -147,7 +97,7 @@ describe("Backbone.View", function(){
   it("undelegateEvents", function() {
     var counter1 = 0, counter2 = 0;
 
-    setFixtures("<div id='testElement'><h1></h1></div>");
+    this.setFixtures("<div id='testElement'><h1></h1></div>");
     var view = new VDOMItemView({el: '#testElement'});
     view.increment = function(){ counter1++; };
     view.$el.on('click', function(){ counter2++; });
@@ -184,7 +134,7 @@ describe("Backbone.View", function(){
     });
     strictEqual(new View().el, document.body);
 
-    setFixtures("<div id='testElement'><h1></h1></div>");
+    this.setFixtures("<div id='testElement'><h1></h1></div>");
     View = VDOMItemView.extend({
       el: "#testElement > h1"
     });
@@ -362,7 +312,7 @@ describe("Backbone.View", function(){
   });
 
   it("events passed in options", function() {
-    setFixtures("<div id='testElement'><h1></h1></div>");
+    this.setFixtures("<div id='testElement'><h1></h1></div>");
 
     var counter = 0;
 

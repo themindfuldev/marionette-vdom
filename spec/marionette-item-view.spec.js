@@ -1,54 +1,9 @@
-var _     = require('underscore')
-var jsdom = require('jsdom').jsdom;
-
-global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
-  FetchExternalResources   : ['script'],
-  ProcessExternalResources : ['script'],
-  MutationEvents           : '2.0',
-  QuerySelector            : false
-});
-
-global.window = document.createWindow();
-global.navigator = global.window.navigator;
-
-var chai = require('chai');
-var sinon = require('sinon');
-var sinonChai = require('sinon-chai');
-var chaiJq = require('chai-jq');
-
-chai.use(sinonChai);
-chai.use(chaiJq);
-
-global.expect = chai.expect;
-
-var $            = require('jquery');
-var Backbone     = require('backbone');
-Backbone.$       = $;
-
-var Marionette   = require('backbone.marionette');
-var VDOMItemView = require("../vdom-item-view")
-
-var $body = $(document.body);
-
-var setFixtures = function () {
-  _.each(arguments, function (content) {
-    $body.append(content);
-  });
-};
-
-var clearFixtures = function() {
-  $body.empty();
-}
-
+require('./setup/init');
 
 describe('item view', function() {
   'use strict';
 
   beforeEach(function() {
-    this.sinon = sinon.sandbox.create();
-    this.setFixtures   = setFixtures;
-    this.clearFixtures = clearFixtures;
-
     this.modelData      = {foo: 'bar'};
     this.collectionData = [{foo: 'bar'}, {foo: 'baz'}];
     this.model      = new Backbone.Model(this.modelData);
@@ -56,11 +11,6 @@ describe('item view', function() {
 
     this.template = 'foobar';
     this.templateStub = this.sinon.stub().returns(this.template);
-  });
-
-  afterEach(function() {
-    this.sinon.restore();
-    this.clearFixtures();
   });
 
   describe('when rendering without a valid template', function() {
