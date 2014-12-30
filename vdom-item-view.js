@@ -29,9 +29,11 @@ module.exports = Marionette.ItemView.extend({
 
   setElement: function(element, delegate) {
     Marionette.ItemView.prototype.setElement.apply(this, arguments);
-    this.virtualEl = convertHTML(this.$el.clone().wrap('<div>').parent().html());
-    this.rootEl = createElement(this.virtualEl);
-    this.$el.html(this.rootEl);
+    if (this.el) {
+      this.virtualEl = convertHTML(this.$el.clone().wrap('<div>').parent().html());
+      this.rootEl = createElement(this.virtualEl);
+      this.$el.html(this.rootEl);
+    }
     return this;
   },
 
