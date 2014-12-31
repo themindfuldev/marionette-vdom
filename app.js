@@ -10,11 +10,6 @@ var myModel = new Model({
   unit: 'aaaaaa'
 });
 
-// var VDOMItemView = require('./vdom-item-view');
-// var myView = new VDOMItemView();
-// myView.setElement('<p><a><b>test</b></a></p>');
-// console.log('view.$(a b).html()='+myView.$('a b').html());
-
 var myView = new MyView({
   model: myModel
 });

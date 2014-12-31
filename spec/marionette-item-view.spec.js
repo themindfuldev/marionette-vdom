@@ -1,6 +1,6 @@
 require('./setup/init');
 
-describe('item view', function() {
+describe('Marionette.ItemView', function() {
   'use strict';
 
   beforeEach(function() {

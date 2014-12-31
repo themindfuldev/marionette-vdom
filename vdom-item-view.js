@@ -12,12 +12,13 @@ module.exports = Marionette.ItemView.extend({
   // setElement: function(element, delegate) {
   //   if (this.$el) this.undelegateEvents();
 
-  //   var newEl = element instanceof Backbone.$ ? element[0] : Backbone.$(element)[0];
+  //   this.el = element instanceof Backbone.$ ? element[0] : Backbone.$(element)[0];
 
-  //   if (newEl) {
-  //     this.virtualEl = virtualize(newEl);
+  //   if (this.el) {
+  //     this.virtualEl = virtualize(this.el);
   //     this.el = createElement(this.virtualEl);
   //   }
+
   //   this.$el = Backbone.$(this.el);
 
   //   if (delegate !== false) this.delegateEvents();
@@ -30,8 +31,11 @@ module.exports = Marionette.ItemView.extend({
     Marionette.ItemView.prototype.setElement.apply(this, arguments);
     if (this.el) {
       this.virtualEl = virtualize(this.el);
-      this.rootEl = createElement(this.virtualEl);
-      this.$el.html(this.rootEl);
+
+      if (!this.$el.parent().length || this.$el.parent('body').length) {
+        this.rootEl = createElement(this.virtualEl);
+        this.$el.html(this.rootEl);
+      }
     }
     return this;
   },
@@ -39,7 +43,8 @@ module.exports = Marionette.ItemView.extend({
   attachElContent: function(html) {
     var newVirtualEl = virtualize.fromHTML(html);
     var patches = diff(this.virtualEl, newVirtualEl);
-    //patch(this.el, patches);
+    // this.el = patch(this.el, patches);
+    // this.$el = Backbone.$(this.el);
     this.rootEl = patch(this.rootEl, patches);
     this.virtualEl = newVirtualEl;
     return this;

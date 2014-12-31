@@ -1,6 +1,6 @@
 require('./setup/init');
 
-describe('base view', function() {
+describe('Marionette.View', function() {
   'use strict';
 
   describe('when creating a view', function() {
