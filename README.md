@@ -16,6 +16,13 @@ To run:
 npm start
 ```
 
+To run the demo app:
+
+```bash
+npm run demo
+open http://127.0.0.1:9966/demo/demo.html
+```
+
 To run the unit tests:
 
 ```

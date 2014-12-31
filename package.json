@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "beefy app.js:build.js --live",
+    "demo": "beefy demo/demo.js:demo/demo-build.js --live",
     "bundle": "browserify app.js -o build.js",
     "test": "mocha spec/"
   },
