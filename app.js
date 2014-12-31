@@ -6,6 +6,7 @@ var Backbone = require('backbone');
 Backbone.$ = $;
 
 var VDOMItemView = require('./vdom-item-view');
+//var VDOMItemView = require('./vdom-item-view.alternate');
 
 // Defining Model and View
 var Model = Backbone.Model.extend({
