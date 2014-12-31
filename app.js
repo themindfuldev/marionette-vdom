@@ -1,19 +1,40 @@
 'use strict';
 
 var $ = require('jquery');
-require('backbone').$ = $;
+var _ = require('underscore');
+var Backbone = require('backbone');
+Backbone.$ = $;
 
-var Model = require('./app-model');
-var MyView = require('./my-vdom-view');
+var VDOMItemView = require('./vdom-item-view');
 
+// Defining Model and View
+var Model = Backbone.Model.extend({
+  defaults: {
+    unit: 'o',
+    content: ''
+  },
+  tick: function() {
+    this.set('content', this.get('content').concat(this.get('unit')));
+  }
+});
+
+var View = VDOMItemView.extend({
+  template: _.template('<p><a><b>w<%= content %></b></a></p>'),
+  modelEvents: {
+    "change": "render"
+  }
+});
+
+// Instantiating myModel and myView
 var myModel = new Model({
   unit: 'aaaaaa'
 });
 
-var myView = new MyView({
+var myView = new View({
   model: myModel
 });
 
+// rendering
 myView.render().$el.appendTo('body');
 
 setInterval(function() {
