@@ -6,6 +6,7 @@
   "scripts": {
     "start": "beefy app.js:build.js --live",
     "demo": "beefy demo/demo.js:demo/demo-build.js --live",
+    "perf": "beefy perf/perf.js:perf/perf-build.js --live",
     "bundle": "browserify app.js -o build.js",
     "test": "mocha spec/"
   },
@@ -37,11 +38,12 @@
   "devDependencies": {
     "beefy": "^2.1.1",
     "browserify": "^7.0.3",
-    "jsdom": "0.10.5",
-    "sinon": "^1.12.2",
-    "mocha": "^2.1.0",
-    "sinon-chai": "^2.6.0",
+    "chai": "^1.10.0",
     "chai-jq": "0.0.8",
-    "chai": "^1.10.0"
+    "jsdom": "0.10.5",
+    "mocha": "^2.1.0",
+    "react": "^0.12.2",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
   }
 }
