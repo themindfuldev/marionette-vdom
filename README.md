@@ -23,6 +23,13 @@ npm run demo
 open http://127.0.0.1:9966/demo/demo.html
 ```
 
+To run the perf test:
+
+```bash
+npm run perf
+open http://127.0.0.1:9966/perf/perf.html
+```
+
 To run the unit tests:
 
 ```
