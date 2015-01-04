@@ -117,8 +117,8 @@ var BoxView = Marionette.ItemView.extend({
 
     template: _.template($('#underscore-template').html()),
 
-    initialize: function() {
-        this.listenTo(this.model, 'change', this.render);
+    modelEvents: {
+       "change": "render"
     }
 
 });
@@ -181,8 +181,8 @@ var BoxView = VDOMItemView.extend({
 
     template: _.template($('#underscore-template').html()),
 
-    initialize: function() {
-        this.listenTo(this.model, 'change', this.render);
+    modelEvents: {
+       "change": "render"
     }
 
 });
