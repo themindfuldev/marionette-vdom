@@ -1,4 +1,4 @@
-### upcoming [v0.0.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...master)
+    ### upcoming [v0.0.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...master)
 
 #### Overview
 

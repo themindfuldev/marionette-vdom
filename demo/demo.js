@@ -4,10 +4,10 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
+require('../index.js');
+var Marionette = require('backbone.marionette');
 
-var VDOMItemView = require('../vdom-item-view');
-
-var View = VDOMItemView.extend({
+var View = Marionette.ItemView.extend({
   template: _.template('<p>VIEW <%= cid %> </br> <b><%= text %></b></br><input class="input" value="<%= text %>"/></br><textarea class="input"><%= text %></textarea></p>'),
   events: {
     "input .input": function(e){
@@ -21,7 +21,8 @@ var View = VDOMItemView.extend({
   },
   modelEvents: {
     "change": "render"
-  }
+  },
+  enableVDOM: true
 });
 
 var myModel = new Backbone.Model({text: "Type.. I dare you"})

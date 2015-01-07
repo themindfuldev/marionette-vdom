@@ -31,8 +31,11 @@ global.$ = global.jQuery = require('jquery');
 global._ = require('underscore');
 global.Backbone = require('backbone');
 global.Backbone.$ = global.$;
+require('../../index.js');
 global.Marionette = require('backbone.marionette');
-global.VDOMItemView = require('../../vdom-item-view');
+global.VDOMItemView = global.Marionette.ItemView.extend({
+  enableVDOM: true
+});
 
 var $body = $(document.body);
 

@@ -4,9 +4,8 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
-
-var VDOMItemView = require('./vdom-item-view');
-//var VDOMItemView = require('./vdom-item-view.alternate');
+require('./index.js');
+var Marionette = require('backbone.marionette');
 
 // Defining Model and View
 var Model = Backbone.Model.extend({
@@ -19,11 +18,12 @@ var Model = Backbone.Model.extend({
   }
 });
 
-var View = VDOMItemView.extend({
+var View = Marionette.ItemView.extend({
   template: _.template('<p><a><b>w<%= content %></b></a></p>'),
   modelEvents: {
     "change": "render"
-  }
+  },
+  enableVDOM: true
 });
 
 // Instantiating myModel and myView
