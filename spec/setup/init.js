@@ -36,6 +36,9 @@ global.Marionette = require('backbone.marionette');
 global.VDOMItemView = global.Marionette.ItemView.extend({
   enableVDOM: true
 });
+global.VDOMCompositeView = global.Marionette.CompositeView.extend({
+  enableVDOM: true
+});
 
 var $body = $(document.body);
 
