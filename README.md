@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tiagorg/Marionette.VDOMView.svg?branch=master)](https://travis-ci.org/tiagorg/Marionette.VDOMView)
+[![Build Status](https://travis-ci.org/tiagorg/marionette-vdom.svg?branch=master)](https://travis-ci.org/tiagorg/marionette-vdom)
 
 # marionette-vdom
 
