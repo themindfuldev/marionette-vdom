@@ -1,9 +1,9 @@
 'use strict';
 
 var Backbone = require('backbone');
+var _ = require('underscore');
 var diff = require('virtual-dom/diff');
 var patch = require('virtual-dom/patch');
-var createElement = require('virtual-dom/create-element');
 var convertHTML = require('html-to-vdom')({
   VNode: require('virtual-dom/vnode/vnode'),
   VText: require('virtual-dom/vnode/vtext')
@@ -26,16 +26,20 @@ module.exports = function(prototype) {
       }
     },
 
+    rootTemplate: _.template('<<%= tag %>><%= content %></<%= tag %>>'),
+
     attachElContent: function(html) {
       if (this.enableVDOM) {
-        var newVirtualEl = convertHTML(Backbone.$.trim(html));
+        var newVirtualEl = convertHTML(this.rootTemplate({
+          tag: this.tagName,
+          content: Backbone.$.trim(html)
+        }));
         if (this.virtualEl) {
           var patches = diff(this.virtualEl, newVirtualEl);
-          this.rootEl = patch(this.rootEl, patches);
+          patch(this.el, patches);
         }
         else {
-          this.rootEl = createElement(newVirtualEl);
-          this.$el.html(this.rootEl);
+          this.$el.html(html);
         }
         this.virtualEl = newVirtualEl;
         return this;
@@ -48,5 +52,5 @@ module.exports = function(prototype) {
       this.virtualEl = this.rootEl = null;
       return _remove.apply(this, arguments);
     }
-  }
+  };
 };
