@@ -1,19 +1,21 @@
-    ### upcoming [v0.0.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...master)
+### [v0.1.0-pre](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0-pre) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0-pre)
 
 #### Overview
 
-* The main goal of this version is to fix the unit tests that are failing and improve the test suite.
+* The main goal of this version is to improve the test suite and add support to ```Marionette.ItemView``` and ```Marionette.CompositeView```.
 
 #### Features
 
-* Replaced the test suite for the one from Backbone 1.1.2
-* Might replace [html-to-vdom](https://github.com/TimBeyer/html-to-vdom) for [vdom-virtualize](https://github.com/marcelklehr/vdom-virtualize/)
-* Might stop inheriting ```setElement``` and defining its own implementation.
+* Added support for both ```Marionette.ItemView``` and ```Marionette.CompositeView``` through a reusable mixin.
+* Brought test suite from Backbone 1.1.2.
+* Brought ```Marionette.CompositeView``` tests from Marionette 2.3.
+* Added support for templates that don't have a sole root element as ```<a>one</a><b>two</b>``` or ```I'm free```.
+* Performance was significantly improved. Added perf test.
 
 #### Next steps
 
-* Come up with virtual DOM implementation for other Marionette views.
-* Strive for conceiving a reusable virtual DOM View to be extended by the leaf Marionette views (either by inheritance or mixing).
+* Support more ```this.el``` attributes.
+* Write tests for different scenarios.
 
 ### [v0.0.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.1)
 
@@ -51,3 +53,5 @@ There is also plenty of more JS happening (2nd image) but the Used JS Heap is mu
 
 * Fix the 3 unit tests that are failing.
 * Improve the test suite.
+* Come up with virtual DOM implementation for other Marionette views.
+* Strive for conceiving a reusable virtual DOM View to be extended by the leaf Marionette views (either by inheritance or mixin).
