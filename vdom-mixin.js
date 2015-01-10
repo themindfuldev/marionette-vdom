@@ -1,5 +1,6 @@
 'use strict';
 
+var Backbone = require('backbone');
 var diff = require('virtual-dom/diff');
 var patch = require('virtual-dom/patch');
 var createElement = require('virtual-dom/create-element');
@@ -27,17 +28,16 @@ module.exports = function(prototype) {
 
     attachElContent: function(html) {
       if (this.enableVDOM) {
+        var newVirtualEl = convertHTML(Backbone.$.trim(html));
         if (this.virtualEl) {
-          var newVirtualEl = convertHTML(html.trim());
           var patches = diff(this.virtualEl, newVirtualEl);
           this.rootEl = patch(this.rootEl, patches);
-          this.virtualEl = newVirtualEl;
         }
         else {
-          this.virtualEl = convertHTML(html.trim());
-          this.rootEl = createElement(this.virtualEl);
+          this.rootEl = createElement(newVirtualEl);
           this.$el.html(this.rootEl);
         }
+        this.virtualEl = newVirtualEl;
         return this;
       }
 
@@ -45,8 +45,7 @@ module.exports = function(prototype) {
     },
 
     remove: function() {
-      this.virtualEl = null;
-      this.rootEl = null;
+      this.virtualEl = this.rootEl = null;
       return _remove.apply(this, arguments);
     }
   }

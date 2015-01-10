@@ -10,7 +10,7 @@ describe('Marionette.CompositeView - childViewContainer', function() {
 
     this.templateFn = _.template('<div id="foo"></div>');
 
-    this.ItemView = Marionette.ItemView.extend({
+    this.ItemView = VDOMItemView.extend({
       tagName: 'li',
       render: function() {
         this.$el.html(this.model.get('foo'));
@@ -138,7 +138,7 @@ describe('Marionette.CompositeView - childViewContainer', function() {
 
   describe('when a collection is loaded / reset after the view is created and before it is rendered', function() {
     beforeEach(function() {
-      this.ItemView = Marionette.ItemView.extend({
+      this.ItemView = VDOMItemView.extend({
         template: this.templateFn
       });
 
