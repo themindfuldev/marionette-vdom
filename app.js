@@ -4,8 +4,7 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
-require('./index.js');
-var Marionette = require('backbone.marionette');
+var VDOMItemView = require('./index.js').VDOMItemView;
 
 // Defining Model and View
 var Model = Backbone.Model.extend({
@@ -18,7 +17,7 @@ var Model = Backbone.Model.extend({
   }
 });
 
-var View = Marionette.ItemView.extend({
+var View = VDOMItemView.extend({
   template: _.template('<p><a><b>w<%= content %></b></a></p>'),
   modelEvents: {
     "change": "render"

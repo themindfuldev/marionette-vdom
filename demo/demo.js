@@ -4,10 +4,9 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
-require('../index.js');
-var Marionette = require('backbone.marionette');
+var VDOMItemView = require('../index.js').VDOMItemView;
 
-var View = Marionette.ItemView.extend({
+var View = VDOMItemView.extend({
   template: _.template('<p>VIEW <%= cid %> </br> <b><%= text %></b></br><input class="input" value="<%= text %>"/></br><textarea class="input"><%= text %></textarea></p>'),
   events: {
     "input .input": function(e){

@@ -12,44 +12,33 @@ var convertHTML = require('html-to-vdom')({
 module.exports = function(prototype) {
 
   var _initialize = prototype.initialize;
-  var _attachElContent = prototype.attachElContent;
   var _remove = prototype.remove;
 
   return {
     initialize: function() {
       _initialize.apply(this, arguments);
-      if (typeof this.options.enableVDOM !== 'undefined') {
-        this.enableVDOM = this.options.enableVDOM;
-      }
-      else if (typeof this.enableVDOM === 'undefined') {
-        this.enableVDOM = false;
-      }
     },
 
     rootTemplate: _.template('<<%= tag %>><%= content %></<%= tag %>>'),
 
     attachElContent: function(html) {
-      if (this.enableVDOM) {
-        var newVirtualEl = convertHTML(this.rootTemplate({
-          tag: this.tagName,
-          content: Backbone.$.trim(html)
-        }));
-        if (this.virtualEl) {
-          var patches = diff(this.virtualEl, newVirtualEl);
-          patch(this.el, patches);
-        }
-        else {
-          this.$el.html(html);
-        }
-        this.virtualEl = newVirtualEl;
-        return this;
+      var newVirtualEl = convertHTML(this.rootTemplate({
+        tag: this.tagName,
+        content: Backbone.$.trim(html)
+      }));
+      if (this.virtualEl) {
+        var patches = diff(this.virtualEl, newVirtualEl);
+        patch(this.el, patches);
       }
-
-      return _attachElContent.apply(this, arguments);
+      else {
+        this.$el.html(html);
+      }
+      this.virtualEl = newVirtualEl;
+      return this;
     },
 
     remove: function() {
-      this.virtualEl = this.rootEl = null;
+      this.virtualEl = null;
       return _remove.apply(this, arguments);
     }
   };

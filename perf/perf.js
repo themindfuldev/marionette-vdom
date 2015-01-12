@@ -4,8 +4,8 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
-require('../index.js');
 var Marionette = require('backbone.marionette');
+var VDOMItemView = require('../index.js').VDOMItemView;
 var React = require('react');
 
 // Change N to change the number of drawn circles.
@@ -174,7 +174,7 @@ var Box = Backbone.Model.extend({
     }
 });
 
-var BoxView = Marionette.ItemView.extend({
+var BoxView = VDOMItemView.extend({
 
     className: 'box-view',
 
@@ -182,9 +182,7 @@ var BoxView = Marionette.ItemView.extend({
 
     modelEvents: {
        "change": "render"
-    },
-
-    enableVDOM: true
+    }
 
 });
 

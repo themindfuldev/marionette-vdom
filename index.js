@@ -4,5 +4,13 @@ var Marionette = require('backbone.marionette');
 var _ = require('underscore');
 var VDOMMixin = require('./vdom-mixin');
 
-_.extend(Marionette.ItemView.prototype, VDOMMixin(Marionette.ItemView.prototype));
-_.extend(Marionette.CompositeView.prototype, VDOMMixin(Marionette.CompositeView.prototype));
+var VDOMItemView = Marionette.ItemView.extend({});
+_.extend(VDOMItemView.prototype, VDOMMixin(VDOMItemView.prototype));
+
+var VDOMCompositeView = Marionette.CompositeView.extend({});
+_.extend(VDOMCompositeView.prototype, VDOMMixin(VDOMCompositeView.prototype));
+
+module.exports = {
+  VDOMItemView: VDOMItemView,
+  VDOMCompositeView: VDOMCompositeView
+};
