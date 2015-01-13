@@ -6,31 +6,11 @@ A ```Marionette.ItemView``` and ```Marionette.CollectionView``` implementation w
 
 ## Usage
 
-Once you have loaded Marionette, just require it:
+This module exposes ```VDOMItemView``` as the VDOM implementation for ```Marionette.ItemView``` and ```VDOMCollectionView``` for ```Marionette.CollectionView```:
 
 ```javascript
-require('marionette-vdom');
-```
-
-Now you can start using your ```Marionette.ItemView```s and ```Marionette.CollectionView```s with VDOM by just providing them the parameter ```enableVDOM: true```. You can do it either on the class definition or the object instantiation (the latter overrides the former):
-
-```javascript
-var View = Marionette.ItemView.extend({
-  template: _.template('<p><a><b>w<%= content %></b></a></p>'),
-  modelEvents: {
-    "change": "render"
-  },
-  enableVDOM: true
-});
-```
-
-or
-
-```javascript
-var myView = new View({
-  model: myModel,
-  enableVDOM: true
-});
+var VDOMItemView = require('marionette-vdom').VDOMItemView;
+var VDOMCollectionView = require('marionette-vdom').VDOMCollectionView;
 ```
 
 ## How tos
