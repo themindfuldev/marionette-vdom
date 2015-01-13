@@ -10,11 +10,11 @@
 * Brought test suite from Backbone 1.1.2.
 * Brought ```Marionette.CompositeView``` tests from Marionette 2.3.
 * Added support for templates that don't have a sole root element as ```<a>one</a><b>two</b>``` or ```I'm free```.
+* Started using ```outerHTML``` to retrieve the root element template to tacke the challenge above.
 * Performance was significantly improved. Added perf test.
 
 #### Next steps
 
-* Support more ```this.el``` attributes.
 * Write tests for different scenarios.
 
 ### [v0.0.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.1)
