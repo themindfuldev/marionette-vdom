@@ -2,6 +2,8 @@
 
 # marionette-vdom
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tiagorg/marionette-vdom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A ```Marionette.ItemView``` and ```Marionette.CollectionView``` implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 ## Usage
