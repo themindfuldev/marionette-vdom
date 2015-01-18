@@ -1,4 +1,4 @@
-### [v0.1.0-pre](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0-pre) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0-pre)
+### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0-pre) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0)
 
 #### Overview
 
@@ -15,7 +15,7 @@
 
 #### Next steps
 
-* Write tests for different scenarios.
+* Add support to Browser's Marionette and AMD through perhaps UMD.
 
 ### [v0.0.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.0.1)
 
