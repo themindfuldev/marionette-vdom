@@ -1,4 +1,4 @@
-### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0-pre) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0)
+### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0)
 
 #### Overview
 
