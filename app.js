@@ -21,8 +21,7 @@ var View = VDOMItemView.extend({
   template: _.template('<p><a><b>w<%= content %></b></a></p>'),
   modelEvents: {
     "change": "render"
-  },
-  enableVDOM: true
+  }
 });
 
 // Instantiating myModel and myView
