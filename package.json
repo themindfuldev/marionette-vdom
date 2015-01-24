@@ -8,10 +8,10 @@
     "demo": "beefy demo/demo.js:demo/demo-build.js --live",
     "perf": "beefy perf/perf.js:perf/perf-build.js --live",
     "bundle": "browserify app.js -o build.js",
-    "test": "mocha spec/",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha spec/ --report lcovonly -- -R spec",
+    "test": "mocha test/",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec",
     "view-cover": "istanbul report html && open ./coverage/index.html",
-    "travis-test": "istanbul cover ./node_modules/mocha/bin/_mocha spec/ --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "travis-test": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
