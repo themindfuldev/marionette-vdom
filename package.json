@@ -33,7 +33,7 @@
     "html-to-vdom": "^0.4.0",
     "jquery": "^2.1.3",
     "underscore": "^1.7.0",
-    "virtual-dom": "^0.0.24"
+    "virtual-dom": "^1.2.0"
   },
   "devDependencies": {
     "beefy": "^2.1.1",

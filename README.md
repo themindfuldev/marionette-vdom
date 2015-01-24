@@ -1,4 +1,4 @@
-# marionette-vdom [![Build Status](https://travis-ci.org/tiagorg/marionette-vdom.svg?branch=master)](https://travis-ci.org/tiagorg/marionette-vdom) [![npm version](https://badge.fury.io/js/marionette-vdom.svg)](http://badge.fury.io/js/marionette-vdom) [![Davis Dependency status](https://david-dm.org/tiagorg/marionette-vdom.svg)](https://david-dm.org/tiagorg/marionette-vdom)
+# marionette-vdom [![Build Status](https://travis-ci.org/tiagorg/marionette-vdom.svg?branch=master)](https://travis-ci.org/tiagorg/marionette-vdom) [![Coverage Status](https://coveralls.io/repos/tiagorg/marionette-vdom/badge.svg)](https://coveralls.io/r/tiagorg/marionette-vdom) [![npm version](https://badge.fury.io/js/marionette-vdom.svg)](http://badge.fury.io/js/marionette-vdom) [![Davis Dependency status](https://david-dm.org/tiagorg/marionette-vdom.svg)](https://david-dm.org/tiagorg/marionette-vdom)
 
 A ```Marionette.ItemView``` and ```Marionette.CollectionView``` implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
