@@ -19,6 +19,13 @@ if (!global.document || !global.window) {
     QuerySelector            : false
   });
 
+  global.XMLSerializer = require('xmldom').XMLSerializer;
+
+  sinon.stub(global.document, 'createElementNS', function() {
+    global.document.createElementNS.restore();
+    return {};
+  });
+
   global.window = document.createWindow();
   global.navigator = global.window.navigator;
 
