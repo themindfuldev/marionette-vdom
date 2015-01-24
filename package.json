@@ -8,7 +8,10 @@
     "demo": "beefy demo/demo.js:demo/demo-build.js --live",
     "perf": "beefy perf/perf.js:perf/perf-build.js --live",
     "bundle": "browserify app.js -o build.js",
-    "test": "mocha spec/"
+    "test": "mocha spec/",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha spec/ --report lcovonly -- -R spec",
+    "view-cover": "istanbul report html && open ./coverage/index.html",
+    "travis-test": "istanbul cover ./node_modules/mocha/bin/_mocha spec/ --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -40,6 +43,7 @@
     "browserify": "^7.0.3",
     "chai": "^1.10.0",
     "chai-jq": "0.0.8",
+    "istanbul": "^0.3.5",
     "jsdom": "0.10.5",
     "mocha": "^2.1.0",
     "react": "^0.12.2",
