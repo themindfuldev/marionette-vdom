@@ -5,3 +5,9 @@ before_script:
 - npm install
 - npm install coveralls
 script: npm run travis-test
+env:
+  global:
+    - secure: Qb/yqBQy7mAOme1/qu7/SNP4SwuAjbbaXu+1TTZX7nvq8n1tT81qxPoQABOAd4tv1ZNxXT/TBPegTV3C528ozRu04xuCgkcYSvFPoVNRq91Y0ldVa9QbSlwqZgUkuITymlRpbNlAlegO9e2voL7UVuq0iR+H2CYLkV9TPVVoorg=
+    - secure: gah3s+CpoeWwQXgafRzkfEdGpV3P7m/4/FAhGeo0e7o+2R1JrUVc0dcno3I/GDkzTNsXbNQRkRTTHNZHD3TZpojjG++eIdEGWHznTsB28rRyppU7QFbr6nlTolen6h0j3Fc8DLimCHQZaFklgWD6izT6GggaW+Mr4kl2chIiQvQ=
+addons:
+  sauce_connect: true
