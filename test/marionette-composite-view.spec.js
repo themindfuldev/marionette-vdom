@@ -83,7 +83,6 @@ describe('Marionette.CompositeView', function() {
     it('should render the collections items', function() {
       expect(this.compositeView.$el).to.contain.$text('bar');
       expect(this.compositeView.$el).to.contain.$text('baz');
-      console.log(this.compositeView.$el.html())
     });
   });
 
