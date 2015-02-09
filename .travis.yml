@@ -5,7 +5,7 @@ before_script:
 #- npm install
 #- npm install coveralls
 - npm install -g karma-cli
-#script: npm run travis-test
+script: npm run travis-test
 env:
   global:
     - secure: Qb/yqBQy7mAOme1/qu7/SNP4SwuAjbbaXu+1TTZX7nvq8n1tT81qxPoQABOAd4tv1ZNxXT/TBPegTV3C528ozRu04xuCgkcYSvFPoVNRq91Y0ldVa9QbSlwqZgUkuITymlRpbNlAlegO9e2voL7UVuq0iR+H2CYLkV9TPVVoorg=
