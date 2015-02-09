@@ -2,31 +2,7 @@ var browsers = {                                 // 1
   sl_chrome38lin: {
     base: 'SauceLabs',
     browserName: 'chrome',
-    platform: 'Linux',
-    version: '38'
-  },
-  sl_chrome38mav: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
-    platform: 'OS X Mavericks',
-    version: '38'
-  },
-  sl_chrome38xp: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
-    platform: 'Windows XP',
-    version: '38'
-  },
-  sl_chrome38w7: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
     platform: 'Windows 7',
-    version: '38'
-  },
-  sl_chrome38w81: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
-    platform: 'Windows 8.1',
     version: '38'
   },
   sl_firefox: {
