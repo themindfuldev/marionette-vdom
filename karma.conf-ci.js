@@ -1,9 +1,33 @@
 var browsers = {                                 // 1
-  sl_chrome: {
+  sl_chrome38lin: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'Linux',
+    version: '38'
+  },
+  sl_chrome38mav: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'OS X Mavericks',
+    version: '38'
+  },
+  sl_chrome38xp: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'Windows XP',
+    version: '38'
+  },
+  sl_chrome38w7: {
     base: 'SauceLabs',
     browserName: 'chrome',
     platform: 'Windows 7',
-    version: '35'
+    version: '38'
+  },
+  sl_chrome38w81: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'Windows 8.1',
+    version: '38'
   },
   sl_firefox: {
     base: 'SauceLabs',
@@ -21,6 +45,30 @@ var browsers = {                                 // 1
     browserName: 'internet explorer',
     platform: 'Windows 8.1',
     version: '11'
+  },
+  sl_ie_10: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 7',
+    version: '10'
+  },
+  sl_ie_9: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 7',
+    version: '9'
+  },
+  sl_ie_8: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 7',
+    version: '8'
+  },
+  sl_ie_7: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows XP',
+    version: '7'
   }
 };
 
