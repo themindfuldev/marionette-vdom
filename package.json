@@ -11,7 +11,8 @@
     "test": "karma start",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec",
     "view-cover": "istanbul report html && open ./coverage/index.html",
-    "travis-test": "karma start karma.conf-ci.js"
+    "travis-test": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "travis-saucelabs": "karma start karma.conf-ci"
   },
   "repository": {
     "type": "git",
