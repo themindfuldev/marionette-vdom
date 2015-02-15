@@ -9,7 +9,7 @@ chai.use(chaiJq);
 global.expect = chai.expect;
 global.sinon = sinon;
 
-/*if (!global.document || !global.window) {
+if (!global.document || !global.window) {
   var jsdom = require('jsdom').jsdom;
 
   global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
@@ -32,7 +32,7 @@ global.sinon = sinon;
   global.window.Node.prototype.contains = function (node) {
     return this.compareDocumentPosition(node) & 16;
   };
-}*/
+}
 
 global.$ = global.jQuery = require('jquery');
 global._ = require('underscore');
