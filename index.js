@@ -7,6 +7,6 @@ var VDOMItemView = Marionette.ItemView.extend(VDOMMixin(Marionette.ItemView.prot
 var VDOMCompositeView = Marionette.CompositeView.extend(VDOMMixin(Marionette.CompositeView.prototype));
 
 module.exports = {
-  VDOMItemView: VDOMItemView,
-  VDOMCompositeView: VDOMCompositeView
+  ItemView: VDOMItemView,
+  CompositeView: VDOMCompositeView
 };
