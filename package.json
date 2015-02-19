@@ -4,10 +4,8 @@
   "description": "Marionette.js views implemented with virtual-dom",
   "main": "index.js",
   "scripts": {
-    "start": "beefy app.js:build.js --live",
-    "demo": "beefy demo/demo.js:demo/demo-build.js --live",
-    "perf": "beefy perf/perf.js:perf/perf-build.js --live",
-    "bundle": "browserify app.js -o build.js",
+    "demo": "beefy samples/demo/demo.js:demo/demo-build.js --live",
+    "perf": "beefy samples/perf/perf.js:perf/perf-build.js --live",
     "test": "mocha test/",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec",
     "view-cover": "istanbul report html && open ./coverage/index.html",
