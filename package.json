@@ -49,6 +49,7 @@
     "react": "^0.12.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
-    "xmldom": "^0.1.19"
+    "xmldom": "^0.1.19",
+    "global-lookup-shim": "~0.1.0"
   }
 }

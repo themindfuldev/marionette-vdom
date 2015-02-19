@@ -40,8 +40,8 @@ global.Backbone = require('backbone');
 global.Backbone.$ = global.$;
 global.MarionetteVDOM = require('../../index.js');
 global.Marionette = require('backbone.marionette');
-global.VDOMItemView = global.MarionetteVDOM.VDOMItemView;
-global.VDOMCompositeView = global.MarionetteVDOM.VDOMCompositeView;
+global.VDOMItemView = global.MarionetteVDOM.ItemView;
+global.VDOMCompositeView = global.MarionetteVDOM.CompositeView;
 
 var $body = $(document.body);
 
