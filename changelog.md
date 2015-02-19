@@ -1,4 +1,16 @@
-### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.0.1...v0.1.0)
+### [v0.1.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.1) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.0...v0.1.1)
+
+#### Overview
+
+* The main goal of this version is to implement Browser support.
+
+#### Next steps
+
+* Distribute the browser version
+* Implement Saucelabs to assess browser compatibility
+* Increase code coverage
+
+### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0)
 
 #### Overview
 

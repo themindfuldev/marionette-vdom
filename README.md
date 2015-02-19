@@ -5,11 +5,11 @@ A ```Marionette.ItemView``` and ```Marionette.CompositeView``` implementation wi
 
 ## Usage
 
-This module exposes ```VDOMItemView``` as the VDOM implementation for ```Marionette.ItemView``` and ```VDOMCompositeView``` for ```Marionette.CompositeView```:
+This module exposes ```ItemView``` as the VDOM implementation for ```Marionette.ItemView``` and ```CompositeView``` for ```Marionette.CompositeView```:
 
 ```javascript
-var VDOMItemView = require('marionette-vdom').VDOMItemView;
-var VDOMCompositeView = require('marionette-vdom').VDOMCompositeView;
+var VDOMItemView = require('marionette-vdom').ItemView;
+var VDOMCompositeView = require('marionette-vdom').CompositeView;
 ```
 
 ## How tos
