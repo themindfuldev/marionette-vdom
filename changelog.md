@@ -1,3 +1,17 @@
+### [v0.1.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.2...v0.1.1)
+
+#### Overview
+
+* The main goal of this version is update [html-to-vdom](https://github.com/TimBeyer/html-to-vdom) dependency, so that the bundle will no longer include **lodash**.
+
+#### Next steps
+
+* Distribute the browser version
+* Implement Saucelabs to assess browser compatibility
+* Increase code coverage
+
+### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0)
+
 ### [v0.1.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.1) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.0...v0.1.1)
 
 #### Overview
