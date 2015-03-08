@@ -41,3 +41,7 @@ npm test
 ```
 
 Make sure to check out the [change log](changelog.md).
+
+## Browser support
+
+IE 9 on

@@ -1,6 +1,6 @@
 {
   "name": "marionette-vdom",
-  "version": "0.1.2",
+  "version": "0.1.2a",
   "description": "Marionette.js views implemented with virtual-dom",
   "main": "index.js",
   "scripts": {
