@@ -4,8 +4,8 @@ describe('marionette-vdom', function() {
   'use strict';
 
   var vdomViews = [{
-    def: VDOMItemView,
-    name: 'VDOMItemView'
+    def: VDOMView,
+    name: 'VDOMView'
   }, {
     def: VDOMCompositeView,
     name: 'VDOMCompositeView'
