@@ -3,6 +3,7 @@
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/backbone/backbone.js"></script>
+  <script src="bower_components/backbone.radio/build/backbone.radio.js"></script>
   <script src="bower_components/marionette/lib/backbone.marionette.js"></script>
   <script src="../../dist/marionette.vdom.js"></script>
 </head>
@@ -17,7 +18,7 @@
     m.set('count', m.get('count')+1)
   }, 10);
 
-  new Mn.VDOM.ItemView({
+  new Marionette.VDOM.View({
     el: "body",
     model: m,
     modelEvents: {"change": "render"},

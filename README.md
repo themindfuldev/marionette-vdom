@@ -40,6 +40,24 @@ To run the unit tests:
 npm test
 ```
 
+To generate binaryes:
+
+```bash
+./build.sh
+```
+- Push to your branch XXXXX
+- Head to [closure-compiler.appspot.com/home](http://closure-compiler.appspot.com/home)
+- Use as options:
+```
+// ==ClosureCompiler==
+// @compilation_level ADVANCED_OPTIMIZATIONS
+// @output_file_name default.js
+// @code_url https://raw.githubusercontent.com/tiagorg/marionette-vdom/XXXXX/dist/marionette.vdom.js
+// @language_out ES5
+// ==/ClosureCompiler==
+```
+
+
 Make sure to check out the [change log](changelog.md).
 
 ## Browser support

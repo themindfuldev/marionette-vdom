@@ -4,24 +4,20 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 Backbone.$ = $;
-var VDOMItemView = require('../../index.js').ItemView;
+var VDOMView = require('../../src/index.js').View;
 
-var View = VDOMItemView.extend({
-  template: _.template('<p>VIEW <%= cid %> </br> <b><%= text %></b></br><input class="input" value="<%= text %>"/></br><textarea class="input"><%= text %></textarea></p>'),
+var View = VDOMView.extend({
   events: {
     "input .input": function(e){
       this.model.set('text', e.currentTarget.value)
     }
   },
-  templateHelpers: function() {
-    return {
-      cid: this.cid
-    }
-  },
   modelEvents: {
     "change": "render"
   },
-  enableVDOM: true
+  initialize: function() {
+    this.template = _.template('<p>VIEW ' + this.cid + '</br> <b><%= text %></b></br><input class="input" value="<%= text %>"/></br><textarea class="input"><%= text %></textarea></p>');
+  }
 });
 
 var myModel = new Backbone.Model({text: "Type.. I dare you"})
