@@ -20,7 +20,7 @@ global.$ = global.jQuery = require('jquery');
 global._ = require('underscore');
 global.Backbone = require('backbone');
 global.Backbone.$ = global.$;
-global.MarionetteVDOM = require('../../index.js');
+global.MarionetteVDOM = require('../../src/index.js');
 global.Marionette = require('backbone.marionette');
 global.VDOMView = global.MarionetteVDOM.View;
 global.VDOMCompositeView = global.MarionetteVDOM.CompositeView;
