@@ -1,4 +1,4 @@
-### [v0.2.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.2.1) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.2.1...v0.1.2)
+### [v0.2.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.2.1) [view commit logs](https://github.com/tiagorg/marionette-vdom/compare/v0.1.2...v0.2.1)
 
 #### Overview
 
@@ -9,7 +9,7 @@
 * Implement Saucelabs to assess browser compatibility
 * Increase code coverage
 
-### [v0.1.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.2...v0.1.1)
+### [v0.1.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.2) [view commit logs](https://github.com/tiagorg/marionette-vdom/compare/v0.1.1...v0.1.2)
 
 #### Overview
 
