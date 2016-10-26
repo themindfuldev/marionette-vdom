@@ -1,14 +1,19 @@
 # marionette-vdom
 [![Build Status](https://travis-ci.org/tiagorg/marionette-vdom.svg?branch=master)](https://travis-ci.org/tiagorg/marionette-vdom) [![Coverage Status](https://coveralls.io/repos/tiagorg/marionette-vdom/badge.svg)](https://coveralls.io/r/tiagorg/marionette-vdom) [![npm version](https://badge.fury.io/js/marionette-vdom.svg)](http://badge.fury.io/js/marionette-vdom) [![Davis Dependency status](https://david-dm.org/tiagorg/marionette-vdom.svg)](https://david-dm.org/tiagorg/marionette-vdom)
 
-A ```Marionette.ItemView``` and ```Marionette.CompositeView``` implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
+A ```Marionette.View``` and ```Marionette.CompositeView``` implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
+
+## Version
+
+- If you are using Marionette.js v3+ you should use marionette-vdom v0.2+ (or the latest)
+- If you are using Marionette.js v2 you should use marionette-vdom v0.1.2-b
 
 ## Usage
 
-This module exposes ```ItemView``` as the VDOM implementation for ```Marionette.ItemView``` and ```CompositeView``` for ```Marionette.CompositeView```:
+This module exposes ```View``` as the VDOM implementation for ```Marionette.View``` and ```CompositeView``` for ```Marionette.CompositeView```:
 
 ```javascript
-var VDOMItemView = require('marionette-vdom').ItemView;
+var VDOMView = require('marionette-vdom').View;
 var VDOMCompositeView = require('marionette-vdom').CompositeView;
 ```
 
@@ -40,23 +45,12 @@ To run the unit tests:
 npm test
 ```
 
-To generate binaryes:
+To generate binaries:
 
 ```bash
 ./build.sh
+uglifyjs --compress --mangle -- marionette.vdom.js > marionette.vdom.min.js
 ```
-- Push to your branch XXXXX
-- Head to [closure-compiler.appspot.com/home](http://closure-compiler.appspot.com/home)
-- Use as options:
-```
-// ==ClosureCompiler==
-// @compilation_level ADVANCED_OPTIMIZATIONS
-// @output_file_name default.js
-// @code_url https://raw.githubusercontent.com/tiagorg/marionette-vdom/XXXXX/dist/marionette.vdom.js
-// @language_out ES5
-// ==/ClosureCompiler==
-```
-
 
 Make sure to check out the [change log](changelog.md).
 
