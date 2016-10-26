@@ -1,11 +1,11 @@
 {
   "name": "marionette-vdom",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Marionette.js views implemented with virtual-dom",
   "main": "index.js",
   "scripts": {
-    "demo": "beefy samples/demo/demo.js:demo/demo-build.js --live",
-    "perf": "beefy samples/perf/perf.js:perf/perf-build.js --live",
+    "demo": "beefy samples/demo/demo.js:samples/demo/demo-build.js --live",
+    "perf": "beefy samples/perf/perf.js:samples/perf/perf-build.js --live",
     "test": "mocha test/",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha test/ --report lcovonly -- -R spec",
     "view-cover": "istanbul report html && open ./coverage/index.html",
@@ -41,13 +41,14 @@
     "browserify": "^7.0.3",
     "chai": "^1.10.0",
     "chai-jq": "0.0.8",
+    "global-lookup-shim": "~0.1.0",
     "istanbul": "^0.3.5",
     "jsdom": "9.8.0",
     "mocha": "^2.1.0",
     "react": "^0.12.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
-    "xmldom": "^0.1.19",
-    "global-lookup-shim": "~0.1.0"
+    "uglify-js": "^2.7.4",
+    "xmldom": "^0.1.19"
   }
 }

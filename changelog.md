@@ -1,3 +1,14 @@
+### [v0.2.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.2.1) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.2.1...v0.1.2)
+
+#### Overview
+
+* The main goal of this version is to support Marionette 3, update dependencies and perform some dead code removal in order to generate a smaller bundle.
+
+#### Next steps
+
+* Implement Saucelabs to assess browser compatibility
+* Increase code coverage
+
 ### [v0.1.2](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.2) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.2...v0.1.1)
 
 #### Overview
@@ -9,8 +20,6 @@
 * Distribute the browser version
 * Implement Saucelabs to assess browser compatibility
 * Increase code coverage
-
-### [v0.1.0](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.0)
 
 ### [v0.1.1](https://github.com/tiagorg/Marionette.VDOMView/releases/tag/v0.1.1) [view commit logs](https://github.com/tiagorg/Marionette.VDOMView/compare/v0.1.0...v0.1.1)
 
@@ -68,7 +77,7 @@
 Notice the increasing number of Nodes, from 628 to 629 in 10s.
 The Used JS Heap is pretty high and increasing.
 
-##### Virtual 
+##### Virtual
 ![screen shot 2014-12-26 at 3 30 55 pm](https://cloud.githubusercontent.com/assets/764487/5559883/e83f20d0-8d14-11e4-93eb-6aa1929d7b36.png)
 ![screen shot 2014-12-26 at 3 31 47 pm](https://cloud.githubusercontent.com/assets/764487/5559884/eb53fcaa-8d14-11e4-9d9a-c534a21de720.png)
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./node_modules/.bin/browserify index.js \
+./node_modules/.bin/browserify src/index.js \
   --standalone Marionette.VDOM \
   --external backbone.marionette \
   --external backbone \
