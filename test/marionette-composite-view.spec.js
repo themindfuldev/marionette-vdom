@@ -1,6 +1,6 @@
 require('./setup/init');
 
-describe('Marionette.CompositeView', function() {
+describe('VDOMCompositeView', function() {
   'use strict';
 
   beforeEach(function() {
@@ -49,11 +49,32 @@ describe('Marionette.CompositeView', function() {
     });
   });
 
+  describe('when instantiating a composite view', function() {
+    beforeEach(function() {
+      Marionette.DEV_MODE = true;
+      this.sinon.spy(Marionette.deprecate, '_warn');
+      this.sinon.stub(Marionette.deprecate, '_console', {
+        warn: this.sinon.stub()
+      });
+      Marionette.deprecate._cache = {};
+
+      this.view = new VDOMCompositeView();
+    });
+
+    it('should call Marionette.deprecate', function() {
+      expect(Marionette.deprecate._warn).to.be.calledWith('Deprecation warning: CompositeView is deprecated. Convert to View at your earliest convenience');
+    });
+
+    afterEach(function() {
+      Marionette.DEV_MODE = false;
+    });
+  });
+
   describe('when a composite view has a template without a model', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite template');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -83,7 +104,6 @@ describe('Marionette.CompositeView', function() {
     it('should render the collections items', function() {
       expect(this.compositeView.$el).to.contain.$text('bar');
       expect(this.compositeView.$el).to.contain.$text('baz');
-      console.log(this.compositeView.$el.html())
     });
   });
 
@@ -91,7 +111,7 @@ describe('Marionette.CompositeView', function() {
     beforeEach(function() {
       this.attachElContentStub = this.sinon.stub();
       this.CompositeView = VDOMCompositeView.extend({
-        template: function(){},
+        template: function() {},
         attachElContent: this.attachElContentStub
       });
 
@@ -108,7 +128,7 @@ describe('Marionette.CompositeView', function() {
   describe('when a composite view has a model and a template', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite <%= foo %>');
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -144,28 +164,30 @@ describe('Marionette.CompositeView', function() {
       expect(this.compositeView.$el).to.contain.$text('baz');
     });
 
-    it("should pass template fn, data, and view instance to Marionette.Renderer.Render", function(){
-      expect(Marionette.Renderer.render).to.have.been.calledWith(this.templateFn, { foo: 'bar' }, this.compositeView);
+    it('should pass template fn, data, and view instance to Marionette.Renderer.Render', function() {
+      expect(Marionette.Renderer.render).to.have.been.calledWith(this.templateFn, {foo: 'bar'}, this.compositeView);
     });
   });
 
   describe('when a composite view triggers render in initialize', function() {
+    var onAttachCalls;
+
     beforeEach(function() {
-      var suite = this;
+      onAttachCalls = [];
 
       this.collectionTemplateFn = _.template('');
       this.collectionItemTemplateFn = _.template('<% _.each(items, function(item){ %><span><%= item.foo %></span><% }) %>');
       this.emptyTemplateFn = _.template('&nbsp;');
 
-      this.EmptyView = VDOMItemView.extend({
+      this.EmptyView = VDOMView.extend({
         template: this.emptyTemplateFn,
         tagName: 'hr',
-        onShow: function() {
-          suite.onShow.push('EMPTY');
+        onAttach: function() {
+          onAttachCalls.push('EMPTY');
         }
       });
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         template: this.collectionItemTemplateFn,
         tagName: 'span'
       });
@@ -187,19 +209,19 @@ describe('Marionette.CompositeView', function() {
         collection: new this.Collection()
       });
 
-      this.onShow = [];
-
-      this.compositeView.trigger('show');
+      this.setFixtures('<div id="region"></div>');
+      var region = new Backbone.Marionette.Region({el: '#region'});
+      region.show(this.compositeView);
     });
 
-    it('should call "onShowCallbacks.add"', function() {
-      expect(this.onShow.length === 1).to.be.ok;
+    it('should call onAttach on its empty view', function() {
+      expect(onAttachCalls.length).to.equal(1);
     });
   });
 
   describe('when rendering a composite view without a template', function() {
     beforeEach(function() {
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -228,11 +250,9 @@ describe('Marionette.CompositeView', function() {
 
   describe('when rendering a composite view', function() {
     beforeEach(function() {
-      var suite = this;
-
       this.templateFn = _.template('composite <%= foo %>');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -242,10 +262,13 @@ describe('Marionette.CompositeView', function() {
       this.CompositeView = VDOMCompositeView.extend({
         childView: this.ChildView,
         template: this.templateFn,
-        onRender: function() {}
+        onBeforeRender: function() {
+          return this.isRendered();
+        },
+        onRender: function() {
+          return this.isRendered();
+        }
       });
-
-      this.order = [];
 
       this.m1 = new this.Model({foo: 'bar'});
       this.m2 = new this.Model({foo: 'baz'});
@@ -257,52 +280,56 @@ describe('Marionette.CompositeView', function() {
         collection: this.collection
       });
 
-      this.compositeView.on('render:template', function() {
-        suite.order.push(suite.compositeView.renderedModelView);
-      });
-
-      this.compositeView.on('render:collection', function() {
-        suite.order.push(suite.compositeView.collection);
-      });
-
-      this.compositeView.on('render', function() {
-        suite.order.push(suite.compositeView);
-      });
-
       this.sinon.spy(this.compositeView, 'trigger');
+      this.sinon.spy(this.compositeView, 'onBeforeRender');
       this.sinon.spy(this.compositeView, 'onRender');
+      this.sinon.spy(this.compositeView, '_renderTemplate');
+      this.sinon.spy(this.compositeView, 'bindUIElements');
+      this.sinon.spy(this.compositeView, 'renderChildren');
 
       this.compositeView.render();
     });
 
-    it('should trigger a render event for the model view', function() {
-      expect(this.compositeView.trigger).to.have.been.calledWith('render:template');
-    });
-
     it('should trigger a before:render event for the collection', function() {
-      expect(this.compositeView.trigger).to.have.been.calledWith('before:render:collection', this.compositeView);
+      expect(this.compositeView.trigger).to.have.been.calledWith('before:render:children', this.compositeView);
     });
 
     it('should trigger a render event for the collection', function() {
-      expect(this.compositeView.trigger).to.have.been.calledWith('render:collection', this.compositeView);
+      expect(this.compositeView.trigger).to.have.been.calledWith('render:children', this.compositeView);
     });
 
     it('should trigger a render event for the composite view', function() {
       expect(this.compositeView.trigger).to.have.been.calledWith('render', this.compositeView);
     });
 
+    // ui bindings will only be available after the model is rendered,
+    // but should be available before the collection is rendered.
     it('should guarantee rendering of the model before rendering the collection', function() {
-      expect(this.order[0]).to.equal(this.compositeView.renderedModelView);
-      expect(this.order[1]).to.equal(this.compositeView.collection);
-      expect(this.order[2]).to.equal(this.compositeView);
+      sinon.assert.callOrder(this.compositeView._renderTemplate, this.compositeView.bindUIElements, this.compositeView.renderChildren);
+    });
+
+    it('should call "onBeforeRender"', function() {
+      expect(this.compositeView.onBeforeRender).to.have.been.calledOnce;
     });
 
     it('should call "onRender"', function() {
-      expect(this.compositeView.onRender).to.have.been.called;
+      expect(this.compositeView.onRender).to.have.been.calledOnce;
     });
 
-    it('should only call "onRender" once', function() {
-      expect(this.compositeView.onRender.callCount).to.equal(1);
+    it('should call "onBeforeRender" before "onRender"', function() {
+      expect(this.compositeView.onBeforeRender).to.have.been.calledBefore(this.compositeView.onRender);
+    });
+
+    it('should not be rendered when "onBeforeRender" is called', function() {
+      expect(this.compositeView.onBeforeRender.lastCall.returnValue).not.to.be.ok;
+    });
+
+    it('should be rendered when "onRender" is called', function() {
+      expect(this.compositeView.onRender.lastCall.returnValue).to.be.true;
+    });
+
+    it('should mark as rendered', function() {
+      expect(this.compositeView).to.have.property('_isRendered', true);
     });
   });
 
@@ -310,7 +337,7 @@ describe('Marionette.CompositeView', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite <%= foo %>');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -333,7 +360,7 @@ describe('Marionette.CompositeView', function() {
       });
 
       this.sinon.spy(this.compositeView, 'render');
-      this.sinon.spy(this.compositeView, 'destroyChildren');
+      this.sinon.spy(this.compositeView, '_destroyChildren');
       this.sinon.spy(Backbone.Marionette.Renderer, 'render');
       this.compositeRenderSpy = this.compositeView.render;
 
@@ -346,8 +373,8 @@ describe('Marionette.CompositeView', function() {
     });
 
     it('should destroy all of the child collection child views', function() {
-      expect(this.compositeView.destroyChildren).to.have.been.called;
-      expect(this.compositeView.destroyChildren.callCount).to.equal(2);
+      expect(this.compositeView._destroyChildren).to.have.been.called;
+      expect(this.compositeView._destroyChildren.callCount).to.equal(1);
     });
 
     it('should re-render the collections items', function() {
@@ -359,7 +386,7 @@ describe('Marionette.CompositeView', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite <%= foo %>');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -398,7 +425,7 @@ describe('Marionette.CompositeView', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite <%= foo %>');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -434,7 +461,7 @@ describe('Marionette.CompositeView', function() {
 
       this.childViewTagName = 'span';
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: this.childViewTagName,
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -519,6 +546,26 @@ describe('Marionette.CompositeView', function() {
     });
   });
 
+  describe('when defining childView as neither a function or a class', function() {
+    beforeEach(function() {
+      this.CompositeView = VDOMCompositeView.extend({
+        template: _.template('composite'),
+        onRender: function() {}
+      });
+
+      this.collection = new Backbone.Collection([{id: 1, name: 'one'}, {id: 2, name: 'two'}]);
+
+      this.compositeView = new this.CompositeView({
+        collection: this.collection,
+        childView: 'invalid childView'
+      });
+    });
+
+    it('should throw an error saying the childView is invalid', function() {
+      expect(this.compositeView.render).to.throw('"childView" must be a view class or a function that returns a view class');
+    });
+  });
+
   describe('when working with a composite and recursive model', function() {
     beforeEach(function() {
       this.data = {
@@ -560,7 +607,7 @@ describe('Marionette.CompositeView', function() {
     beforeEach(function() {
       this.templateFn = _.template('composite <%= foo %>');
 
-      this.ChildView = VDOMItemView.extend({
+      this.ChildView = VDOMView.extend({
         tagName: 'span',
         render: function() {
           this.$el.html(this.model.get('foo'));
@@ -593,17 +640,25 @@ describe('Marionette.CompositeView', function() {
     });
 
     it('should destroy the collection of views', function() {
-      expect(this.CompositeModelView.prototype.destroy.callCount).to.equal(1);
+      expect(this.CompositeModelView.prototype.destroy).to.have.been.calledOnce;
+    });
+
+    it('should be marked destroyed', function() {
+      expect(this.compositeView).to.have.property('_isDestroyed', true);
+    });
+
+    it('should be marked not rendered', function() {
+      expect(this.compositeView).to.have.property('_isRendered', false);
     });
   });
 
   describe('when rendering a composite view with no model, using a template to create a grid', function() {
     beforeEach(function() {
-      this.gridTemplateFn = _.template('<thead><tr><th>Username</th><th>Full Name</th></tr></thead><tbody></tbody>');
+      this.gridTemplateFn = _.template('<thead><tr><th>Username</th><th>Full Name</th><tr></thead><tbody></tbody>');
       this.gridRowTemplateFn = _.template('<td><%= username %></td><td><%= fullname %></td>');
 
       // A Grid Row
-      this.GridRow = VDOMItemView.extend({
+      this.GridRow = VDOMView.extend({
         tagName: 'tr',
         template: this.gridRowTemplateFn
       });
@@ -662,7 +717,7 @@ describe('Marionette.CompositeView', function() {
       this.GridViewWithUIBindingsTemplateFn = _.template('<thead><tr><th><%= userHeader %></th><th><%= nameHeader %></th><tr></thead><tbody></tbody>');
 
       // A Grid Row
-      this.GridRow = VDOMItemView.extend({
+      this.GridRow = VDOMView.extend({
         tagName: 'tr',
         template: this.gridRowTemplateFn
       });
@@ -776,15 +831,15 @@ describe('Marionette.CompositeView', function() {
     });
   });
 
-  describe("when serializing view data", function() {
-    beforeEach(function(){
-      this.modelData = { foo: "bar" };
+  describe('when serializing view data', function() {
+    beforeEach(function() {
+      this.modelData = {foo: 'bar'};
       this.view = new VDOMCompositeView();
-      this.sinon.spy(this.view, "serializeModel");
+      this.sinon.spy(this.view, 'serializeModel');
     });
 
-    it("should return an empty object without data", function(){
-      expect(this.view.serializeData()).to.deep.equal({ });
+    it('should return an empty object without data', function() {
+      expect(this.view.serializeData()).to.deep.equal({});
     });
 
     describe('and the view has a model', function() {
@@ -793,7 +848,7 @@ describe('Marionette.CompositeView', function() {
         this.view.serializeData();
       });
 
-      it("should call serializeModel", function(){
+      it('should call serializeModel', function() {
         expect(this.view.serializeModel).to.have.been.calledOnce;
       });
     });
@@ -801,12 +856,121 @@ describe('Marionette.CompositeView', function() {
 
   describe('has a valid inheritance chain back to Marionette.CollectionView', function() {
     beforeEach(function() {
-      this.constructor = this.sinon.spy(Marionette, 'CollectionView');
+      this.constructor = this.sinon.spy(Marionette.CollectionView.prototype, 'constructor');
       this.compositeView = new VDOMCompositeView();
     });
 
     it('calls the parent Marionette.CollectionViews constructor function on instantiation', function() {
       expect(this.constructor).to.have.been.calledOnce;
+    });
+  });
+
+  describe('when defining childView as a function that returns a view class', function() {
+    beforeEach(function() {
+
+      this.m1 = new this.Model({id: 1, name: 'one'});
+      this.m2 = new this.Model({id: 2, name: 'two'});
+      this.m3 = new this.Model({foo: 'bar'});
+      this.collection = new this.Collection([this.m1, this.m2]);
+
+      this.EvenView = VDOMView.extend({
+        tagName: 'span',
+        template: _.template('My name is <%= name %>. I am even.')
+      });
+
+      this.OddView = VDOMView.extend({
+        tagName: 'article',
+        template: _.template('My name is <%= name %>. I am odd.')
+      });
+
+      var suite = this;
+      this.CompositeView = VDOMCompositeView.extend({
+        template: _.template('<header>composite template <%= foo %><div id="cv-container"></div></header>'),
+        childViewContainer: '#cv-container',
+        childView: function(child) {
+          return child.get('id') % 2 === 0 ? suite.EvenView : suite.OddView;
+        }
+      });
+
+      this.compositeView = new this.CompositeView({
+        collection: this.collection,
+        model: this.m3
+      });
+
+      this.compositeView.render();
+    });
+
+    it('should use the correct view class for each child', function() {
+      var markupString = '<header>composite template bar<div id="cv-container"><article>My name is one. I am odd.</article><span>My name is two. I am even.</span></div></header>';
+      expect(this.compositeView.$el).to.have.$html(markupString);
+    });
+  });
+
+  describe('when rendering with a false template', function() {
+    beforeEach(function() {
+      this.onBeforeRenderStub = this.sinon.stub();
+      this.onRenderStub       = this.sinon.stub();
+
+      this.CompositeView = VDOMCompositeView.extend({
+        template: false,
+        onBeforeRender: this.onBeforeRenderStub,
+        onRender: this.onRenderStub,
+
+        ui: {
+          testElement: '.test-element'
+        }
+      });
+
+      this.compositeView = new this.CompositeView();
+
+      this.marionetteRendererSpy   = this.sinon.spy(Marionette.Renderer, 'render');
+      this.triggerSpy              = this.sinon.spy(this.compositeView, 'trigger');
+      this.serializeDataSpy        = this.sinon.spy(this.compositeView, 'serializeData');
+      this.mixinTemplateContextSpy = this.sinon.spy(this.compositeView, 'mixinTemplateContext');
+      this.attachElContentSpy      = this.sinon.spy(this.compositeView, 'attachElContent');
+      this.bindUIElementsSpy       = this.sinon.spy(this.compositeView, 'bindUIElements');
+      this.compositeView.render();
+    });
+
+    it('should not throw an exception for a false template', function() {
+      expect(this.compositeView.render).to.not.throw('Cannot render the template since it is null or undefined.');
+    });
+
+    it('should call an "onBeforeRender" method on the view', function() {
+      expect(this.onBeforeRenderStub).to.have.been.calledOnce;
+    });
+
+    it('should call an "onRender" method on the view', function() {
+      expect(this.onRenderStub).to.have.been.calledOnce;
+    });
+
+    it('should call bindUIElements', function() {
+      expect(this.bindUIElementsSpy).to.have.been.calledOnce;
+    });
+
+    it('should trigger a before:render event', function() {
+      expect(this.triggerSpy).to.have.been.calledWith('before:render', this.compositeView);
+    });
+
+    it('should trigger a rendered event', function() {
+      expect(this.triggerSpy).to.have.been.calledWith('render', this.compositeView);
+    });
+
+    it('should not add in data or template context', function() {
+      expect(this.serializeDataSpy).to.not.have.been.called;
+      expect(this.mixinTemplateContextSpy).to.not.have.been.called;
+    });
+
+    it('should not render a template', function() {
+      expect(this.marionetteRendererSpy).to.not.have.been.called;
+    });
+
+    it('should not attach any html content', function() {
+      expect(this.attachElContentSpy).to.not.have.been.called;
+    });
+
+    it('should claim isRendered', function() {
+      expect(this.compositeView.isRendered()).to.be.true;
     });
   });
 });

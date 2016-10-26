@@ -1,6 +1,6 @@
 {
   "name": "marionette-vdom",
-  "version": "0.1.2-b",
+  "version": "0.2.0",
   "description": "Marionette.js views implemented with virtual-dom",
   "main": "index.js",
   "scripts": {
@@ -29,12 +29,12 @@
   },
   "homepage": "https://github.com/tiagorg/marionette-vdom",
   "dependencies": {
-    "backbone": "^1.1.2",
-    "backbone.marionette": "^2.3.0",
-    "html-to-vdom": "^0.5.4",
+    "backbone": "^1.3.3",
+    "backbone.marionette": "^3.0.0",
+    "html-to-vdom": "^0.7.0",
     "jquery": "^2.1.3",
-    "underscore": "^1.7.0",
-    "virtual-dom": "^1.2.0"
+    "underscore": "^1.8.3",
+    "virtual-dom": "^2.1.1"
   },
   "devDependencies": {
     "beefy": "^2.1.1",
@@ -42,7 +42,7 @@
     "chai": "^1.10.0",
     "chai-jq": "0.0.8",
     "istanbul": "^0.3.5",
-    "jsdom": "0.10.5",
+    "jsdom": "9.8.0",
     "mocha": "^2.1.0",
     "react": "^0.12.2",
     "sinon": "^1.12.2",
