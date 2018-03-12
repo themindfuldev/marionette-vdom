@@ -41,7 +41,7 @@ module.exports = function(prototype) {
         patch(this.el, patches);
       }
       else {
-        this.$el.html(Backbone.$.trim(html));
+        this.el.innerHTML = Backbone.$.trim(html);
       }
       this.virtualEl = newVirtualEl;
       return this;
