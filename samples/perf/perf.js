@@ -8,8 +8,66 @@ var Marionette = require('backbone.marionette');
 var VDOMView = require('../../src/index.js').View;
 var React = require('react');
 
+var html = `
+<div>
+  <style>
+p {
+  font: 12px/16px Arial;
+  margin: 10px 10px 15px;
+}
+
+button {
+  font: bold 14px/14px Arial;
+  margin-left: 10px;
+}
+
+#grid {
+  margin: 10px;
+}
+
+#timing {
+  clear: both;
+  padding-top: 10px;
+}
+
+.box-view {
+  width: 20px; height: 20px;
+  float: left;
+  position: relative;
+  margin: 8px;
+}
+
+.box {
+  border-radius: 100px;
+  width: 20px; height: 10px;
+  padding: 5px 0;
+  color: #fff;
+  font: 10px/10px Arial;
+  text-align: center;
+  position: absolute;
+}
+  </style>
+  <button onclick="runBackbone()">Animate with Backbone</button>
+  <button onclick="runMarionette()">Animate with Backbone + Marionette</button>
+  <button onclick="runMarionetteVDOM()">Animate with Backbone + Marionette + VDOM</button>
+  <button onclick="runReact()">Animate with Vanilla React</button>
+  <button onclick="runVanilla()">Animate with Vanilla JavaScript</button>
+
+  <p id="timing">&nbsp;</p>
+  <div id="grid"></div>
+
+  <script type="x-template" id="underscore-template">
+    <div class="box" id="box-<%= number %>" style="top: <%= top %>px; left: <%= left %>px; background: rgb(0,0,<%= color %>);">
+      <%= content %>
+    </div>
+  </script>
+</div>
+`;
+
 // Change N to change the number of drawn circles.
 var N = 300;
+
+$(document.body).append(html);
 
 // The Backbone implementation:
 (function(){
