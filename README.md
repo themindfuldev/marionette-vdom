@@ -1,5 +1,5 @@
 # marionette-vdom
-[![Build Status](https://travis-ci.org/tiagorg/marionette-vdom.svg?branch=master)](https://travis-ci.org/tiagorg/marionette-vdom) [![Coverage Status](https://coveralls.io/repos/tiagorg/marionette-vdom/badge.svg)](https://coveralls.io/r/tiagorg/marionette-vdom) [![npm version](https://badge.fury.io/js/marionette-vdom.svg)](http://badge.fury.io/js/marionette-vdom) [![Davis Dependency status](https://david-dm.org/tiagorg/marionette-vdom.svg)](https://david-dm.org/tiagorg/marionette-vdom)
+[![Build Status](https://travis-ci.org/themindfuldev/marionette-vdom.svg?branch=master)](https://travis-ci.org/themindfuldev/marionette-vdom) [![Coverage Status](https://coveralls.io/repos/themindfuldev/marionette-vdom/badge.svg)](https://coveralls.io/r/themindfuldev/marionette-vdom) [![npm version](https://badge.fury.io/js/marionette-vdom.svg)](http://badge.fury.io/js/marionette-vdom) [![Davis Dependency status](https://david-dm.org/themindfuldev/marionette-vdom.svg)](https://david-dm.org/themindfuldev/marionette-vdom)
 
 A ```Marionette.View``` and ```Marionette.CompositeView``` implementation with [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
