@@ -3,7 +3,6 @@ node_js:
   - "8.11.3"
 before_script:
 - npm install
-- npm install coveralls
 script: npm run travis-test
 env:
   global:
